@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Current time</title>
+    <title>Current Time</title>
 
     <style>
         body {
@@ -26,7 +24,7 @@
         }
 
         #current-time {
-            font-size: 60px;
+            font-size: 50px;
             margin: 0;
             font-weight: bold;
         }
@@ -43,78 +41,72 @@
             border-radius: 10px;
             margin-bottom: 10px;
             box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-            font-size: 20px;
+            font-size: 22px;
         }
     </style>
 </head>
-
 <body>
-    <h2>Current time</h2>
-    <h3 id="current-time">00:00</h3>
+
+    <h2>Current time (Local)</h2>
+    <h3 id="current-time">00:00:00</h3>
+    <strong>___</strong>
 
     <ul id="list-countries"></ul>
 
-</body>
-
-</html>
-
 <script>
-    const d = new Date();
-    const timeSet = 3600000
+    const timeSet = 3600000;
 
-    // Flags by country code
+    // Flags
     const flags = {
-        "pe": "🇵🇪",
-        "ve": "🇻🇪",
-        "ch": "🇨🇱",
-        "co": "🇨🇴",
-        "ar": "🇦🇷",
-        "mx": "🇲🇽"
-    }
+        pe: "🇵🇪",
+        ve: "🇻🇪",
+        ch: "🇨🇱",
+        co: "🇨🇴",
+        ar: "🇦🇷",
+        mx: "🇲🇽"
+    };
 
-    // Initial Array of Countries
+    // Countries list
     let countries = [
-        { "code": "pe", "name": "Perú", "offset": -5, "time": "" },
-        { "code": "ve", "name": "Venezuela", "offset": -4, "time": "" },
-        { "code": "ch", "name": "Chile", "offset": -3, "time": "" },
-        { "code": "co", "name": "Colombia", "offset": -5, "time": "" },
-        { "code": "ar", "name": "Argentina", "offset": -3, "time": "" },
-        { "code": "mx", "name": "Mexico", "offset": -6, "time": "" },
-    ]
-    
-    // Get current Time of connection
-    const correntTime = new Date().toLocaleString([], { 
-        timeStyle: 'short'
-    })
-    document.getElementById("current-time").innerHTML = correntTime
+        { code: "pe", name: "Perú", offset: -5 },
+        { code: "ve", name: "Venezuela", offset: -4 },
+        { code: "ch", name: "Chile", offset: -3 },
+        { code: "co", name: "Colombia", offset: -5 },
+        { code: "ar", name: "Argentina", offset: -3 },
+        { code: "mx", name: "México", offset: -6 }
+    ];
 
-    // Get time for array of Countries
-    const localTime = d.getTime();
-    const localOffset = d.getTimezoneOffset() * 60000;
-    const utc = localTime + localOffset
-    
-    // Countries iteration
-    countries.forEach(country => {
-        let time = utc + (timeSet * country.offset)
-        country.time = getCurrentTime(time)
-        createListElement(country)
-    });
+    // Main update function
+    function updateTimes() {
+        const now = new Date();
 
-    // Format currentTime
-    function getCurrentTime(time) {
-        return new Date().toLocaleString([], { 
-            timeStyle: 'short'
-        })
+        // Local time with seconds
+        document.getElementById("current-time").innerHTML =
+            now.toLocaleString([], { hourCycle: "h23", timeStyle: "medium" });
+
+        const localUTC = now.getTime() + now.getTimezoneOffset() * 60000;
+
+        let ul = document.getElementById("list-countries");
+        ul.innerHTML = "";
+
+        countries.forEach(c => {
+            let countryTime = new Date(localUTC + (timeSet * c.offset));
+
+            let li = document.createElement("li");
+            li.innerHTML = `
+                <strong>${flags[c.code]} | ${c.name}</strong> |
+                ${countryTime.toLocaleString([], { hourCycle: "h23", timeStyle: "medium" })} |
+                UTC ${c.offset}
+            `;
+
+            ul.appendChild(li);
+        });
     }
 
-    // Create Li element list
-    function createListElement(country) {
-        var ul = document.getElementById("list-countries");
-        var li = document.createElement("li");
-
-        li.innerHTML = `<strong>${country.code.toUpperCase()}</strong> | ${country.time} | UTC ${country.offset}`;
-
-        li.setAttribute("id", country.code);
-        ul.appendChild(li);
-    }
+    // Update every second
+    updateTimes();
+    setInterval(updateTimes, 1000);
 </script>
+
+</body>
+</html>
