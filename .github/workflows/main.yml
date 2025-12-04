@@ -1,4 +1,4 @@
-name: Build and Deploy a Static
+name: Deploy Static Site
 on:
   push:
     branches:
