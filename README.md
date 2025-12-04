@@ -16,6 +16,7 @@ It showcases a minimal CI/CD workflow where every push to the main branch trigge
 
 You can view the deployed website here:  
 👉 **https://dimasx010.github.io/current-time/**
+---
 <img width="313" height="511" alt="image" src="https://github.com/user-attachments/assets/17d68063-2f95-4b55-8a4a-ae84b0f4ec4d" />
 
 
