@@ -1,6 +1,9 @@
 # ⏰ Current Time Viewer
 ![Deploy](https://github.com/dimasx010/current-time/actions/workflows/main.yml/badge.svg)
 [![Website](https://img.shields.io/badge/Live_Site-Current_Time-blue?style=flat-square)](https://dimasx010.github.io/current-time/)
+![Made with HTML](https://img.shields.io/badge/HTML-5-orange?logo=html5)
+![Made with CSS](https://img.shields.io/badge/CSS-3-blue?logo=css3)
+![Made with JS](https://img.shields.io/badge/JavaScript-ES6-yellow?logo=javascript)
 
 A simple, elegant web tool that displays the **current time** in your country and compares it with the times in several selected countries.  
 Designed to be lightweight, fast, and easy to understand.
