@@ -6,7 +6,7 @@ Designed to be lightweight, fast, and easy to understand.
 This project is a small demonstration of how to automatically deploy a static website using GitHub Actions and GitHub Pages.
 It showcases a minimal CI/CD workflow where every push to the main branch triggers an automated deployment to GitHub Pages, ensuring the site stays continuously updated with no manual steps required.
 
-![Deploy](https://github.com/dimasx010/current-time/actions/workflows/deploy.yml/badge.svg)
+![Deploy](https://github.com/dimasx010/current-time/actions/workflows/main.yml/badge.svg)
 ---
 
 ## 🚀 Features
